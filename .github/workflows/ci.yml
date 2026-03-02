@@ -36,16 +36,16 @@ jobs:
         run: poetry install --no-interaction --no-root
 
       - name: Install project
-        run: poetry install --no-interaction
+        run: poetry install --no-interaction --no-root
 
       - name: Run Ruff check
-        run: poetry run ruff check .
+        run: PYTHONPATH=. poetry run ruff check .
 
       - name: Run Ruff format check
         run: poetry run ruff format --check .
 
       - name: Run Mypy
-        run: poetry run mypy .
+        run: PYTHONPATH=. poetry run mypy .
 
       - name: Run Tests
-        run: poetry run pytest
+        run: PYTHONPATH=. poetry run pytest

@@ -19,3 +19,13 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies: [ types-cryptography, hypothesis, eth-typing, py_ecc ]
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: poetry run pytest
+        language: system
+        types: [ python ]
+        pass_filenames: false
+        always_run: true
