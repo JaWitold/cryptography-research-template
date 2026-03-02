@@ -1,0 +1,60 @@
+[project]
+name = "cryptography-research-template"
+version = "0.1.0"
+description = "Cryptographic reference implementations of protocols."
+authors = [
+    {name = "Witold Karaś",email = "witold.karas00@gmail.com"}
+]
+requires-python = ">=3.14,<4"
+dependencies = [
+    "cryptography (>=46.0.5,<47.0.0)",
+    "pynacl (>=1.6.2,<2.0.0)",
+    "py-ecc (>=8.0.0,<9.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.0.2,<10.0.0)",
+    "ipykernel (>=7.2.0,<8.0.0)",
+    "jupyter (>=1.1.1,<2.0.0)",
+    "ruff (>=0.15.4,<0.16.0)",
+    "mypy (>=1.19.1,<2.0.0)",
+    "pytest-cov (>=7.0.0,<8.0.0)",
+    "pre-commit (>=4.5.1,<5.0.0)",
+    "mkdocs (>=1.6.1,<2.0.0)",
+    "mkdocs-material (>=9.7.3,<10.0.0)",
+    "mkdocstrings[python] (>=1.0.3,<2.0.0)",
+    "pdoc (>=16.0.0,<17.0.0)",
+    "hypothesis (>=6.151.9,<7.0.0)"
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+# Select rules: Pyflakes (F), pycodestyle (E), isort (I), pydocstyle (D)
+select = ["E", "F", "I", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+# Disable docstring/comment requirements exclusively in the tests directory
+"tests/*" = ["D"]
+
+[tool.mypy]
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+exclude = ["notebooks/"]
+
+[tool.pytest.ini_options]
+# Automatically run coverage on the src/ directory and output a terminal summary
+testpaths = ["tests"]
+addopts = "-v --cov=src --cov-report=term-missing"
